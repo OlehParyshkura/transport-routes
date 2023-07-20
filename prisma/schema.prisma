@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-1.1.x", "linux-arm64-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Route {
+  id               Int      @id @default(autoincrement())
+  startCity        String
+  endCity          String
+  distance         Float
+  departureDate    DateTime
+  completionDate   DateTime
+  requiredTransport String
+  expectedRevenue  Int
+  transportId      Int?
+  status           RouteStatus
+
+  transport        Transport? @relation(fields: [transportId], references: [id])
+}
+
+model Transport {
+  id           Int      @id @default(autoincrement())
+  licensePlate String   @unique
+  status       TransportStatus
+  model        String
+  purchaseDate DateTime
+  mileage      Int
+  transportType TransportType
+
+  routes        Route[]
+}
+
+enum RouteStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum TransportStatus {
+  AVAILABLE
+  BUSY
+}
+
+enum TransportType {
+  CARGO
+  PASSENGER
+}

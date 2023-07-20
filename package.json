@@ -1,0 +1,24 @@
+{
+  "name": "transport-routes",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "run": "export SLS_DEBUG=* && serverless offline",
+    "runnode":"node index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.15.0",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "joi": "^17.9.2",
+    "prisma": "^4.15.0",
+    "serverless-http": "^3.1.1"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.21.8",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "serverless-offline": "^12.0.4"
+  }
+}

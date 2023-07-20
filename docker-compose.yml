@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  mysql-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: dev_db
+      MYSQL_USER: dev_user
+      MYSQL_PASSWORD: dev_password
+    command: --init-file /etc/mysql/init.sql
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./init.sql:/etc/mysql/init.sql
+      - ./db_data:/var/lib/mysql
